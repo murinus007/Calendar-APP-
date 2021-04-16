@@ -6,19 +6,21 @@ const mongoose = require("mongoose");
 
 const spendingsRoutes = require("./api/routes/spendings");
 
-mongoose.connect(
-  "mongodb+srv://Alex:" +
-    process.env.MONGO_ATLAS_PW +
-    "@calendarapp.r9xuy.mongodb.net/calendarApp?retryWrites=true&w=majority&ssl=true",
-  { useNewUrlParser: true, useUnifiedTopology: true }
-);
-mongoose.connection
-  .once("open", function () {
-    console.log("Conection has been made!");
-  })
-  .on("error", function (error) {
-    console.log("Error is: ", error);
-  });
+mongoose.connect("mongodb+srv://@calendarapp.r9xuy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", { user: "Alex", pass: "0933002090", useNewUrlParser: true, useUnifiedTopology: true })
+
+// mongoose.connect(
+//   "mongodb+srv://Alex:" +
+//     process.env.MONGO_ATLAS_PW +
+//     "@calendarapp.r9xuy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+//   { useNewUrlParser: true, useUnifiedTopology: true }
+// );
+// mongoose.connection
+//   .once("open", function () {
+//     console.log("Conection has been made!");
+//   })
+//   .on("error", function (error) {
+//     console.log("Error is: ", error);
+//   });
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));

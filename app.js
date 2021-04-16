@@ -10,8 +10,15 @@ mongoose.connect(
   "mongodb+srv://Alex:" +
     process.env.MONGO_ATLAS_PW +
     "@calendarapp.r9xuy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&ssl=true",
-    { useNewUrlParser: true, useUnifiedTopology: true }
+  { useNewUrlParser: true, useUnifiedTopology: true }
 );
+mongoose.connection
+  .once("open", function () {
+    console.log("Conection has been made!");
+  })
+  .on("error", function (error) {
+    console.log("Error is: ", error);
+  });
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));

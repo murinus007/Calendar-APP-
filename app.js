@@ -9,19 +9,12 @@ const spendingsRoutes = require("./api/routes/spendings");
 mongoose.connect(
   "mongodb+srv://Alex:" +
     process.env.MONGO_ATLAS_PW +
-    "@calendarapp.r9xuy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&ssl=true",
-  {
-    useMongoClient: true,
-  }
+    "@calendarapp.r9xuy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&ssl=true"
 );
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-
-app.listen(PORT, () => {
-  console.log('Server has been started...')
-})
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");

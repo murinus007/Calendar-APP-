@@ -11,7 +11,7 @@ mongoose.connect(
     process.env.MONGO_ATLAS_PW +
     "@calendarapp.r9xuy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&ssl=true",
     { useNewUrlParser: true, useUnifiedTopology: true }
-).catch(error);
+);
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));

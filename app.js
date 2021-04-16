@@ -6,14 +6,12 @@ const mongoose = require("mongoose");
 
 const spendingsRoutes = require("./api/routes/spendings");
 
-try {
-  await mongoose.connect("mongodb+srv://Alex:" +
-  process.env.MONGO_ATLAS_PW +
-  "@calendarapp.r9xuy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&ssl=true",
-  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
-} catch (error) {
-  console.log(error)
-};
+mongoose.connect(
+  "mongodb+srv://Alex:" +
+    process.env.MONGO_ATLAS_PW +
+    "@calendarapp.r9xuy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&ssl=true",
+    { useNewUrlParser: true }
+);
 
 app.use(morgan("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));

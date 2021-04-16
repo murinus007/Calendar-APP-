@@ -9,7 +9,7 @@ const spendingsRoutes = require("./api/routes/spendings");
 mongoose.connect(
   "mongodb+srv://Alex:" +
     process.env.MONGO_ATLAS_PW +
-    "@calendarapp.r9xuy.mongodb.net/myFirstDatabase?retryWrites=true&w=majority&ssl=true",
+    "@calendarapp.r9xuy.mongodb.net/calendarApp?retryWrites=true&w=majority&ssl=true",
   { useNewUrlParser: true, useUnifiedTopology: true }
 );
 mongoose.connection

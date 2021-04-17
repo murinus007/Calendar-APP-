@@ -1,11 +1,12 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const checkAuth = require('../midlleware/check-auth');
 
 const Spending = require("../models/spending");
 
-router.get("/", (req, res, next) => {
-  Spending.find()
+router.get("/:userId", checkAuth, (req, res, next) => {
+  Spending.find({userId: req.params.userId})
     .exec()
     .then((docs) => {
       console.log(docs);
@@ -25,12 +26,13 @@ router.get("/", (req, res, next) => {
     });
 });
 
-router.post("/", (req, res, next) => {
+router.post("/:userId", checkAuth, (req, res, next) => {
   const spending = new Spending({
     _id: new mongoose.Types.ObjectId(),
     category: req.body.category,
     amount: req.body.amount,
     date: req.body.date,
+    userId: req.params.userId
   });
   spending
     .save()
@@ -49,7 +51,7 @@ router.post("/", (req, res, next) => {
     });
 });
 
-router.get("/:spendingId", (req, res, next) => {
+router.get("/:spendingId", checkAuth, (req, res, next) => {
   const id = req.params.spendingId;
   Spending.findById(id)
     .exec()
@@ -69,7 +71,7 @@ router.get("/:spendingId", (req, res, next) => {
     });
 });
 
-router.patch("/:spendingId", (req, res, next) => {
+router.patch("/:spendingId", checkAuth, (req, res, next) => {
   const id = req.params.spendingId;
   const updateOps = {};
   for (const ops of req.body) {
@@ -89,7 +91,7 @@ router.patch("/:spendingId", (req, res, next) => {
     });
 });
 
-router.delete("/:spendingId", (req, res, next) => {
+router.delete("/:spendingId", checkAuth, (req, res, next) => {
   const id = req.params.spendingId;
   Spending.remove({ _id: id })
     .exec()

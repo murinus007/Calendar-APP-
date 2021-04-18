@@ -19,6 +19,7 @@ router.post("/signup", (req, res, next) => {
           if (err) {
             return res.status(500).json({
               error: err,
+              message: req.body.password + req.body.email + req.body.name
             });
           } else {
             const user = new User({
@@ -39,6 +40,7 @@ router.post("/signup", (req, res, next) => {
                 console.log(err);
                 res.status(500).json({
                   error: err,
+                  message: "Im here" + err
                 });
               });
           }
@@ -78,7 +80,8 @@ router.post("/login", (req, res, next) => {
           return res.status(200).json({
             message: "Auth successful",
             token: token,
-            userId: user[0]._id
+            userId: user[0]._id,
+            name: user[0].name
           });
         }
         res.status(401).json({
